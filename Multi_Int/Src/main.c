@@ -19,6 +19,11 @@
 #include <stdint.h>
 #include "int.h"
 
+void delay(void)
+{
+	for(uint32_t i = 0 ; i< 250000 ; i++);
+}
+
 uint32_t* EXTI_PR = (uint32_t*) ( EXTI_BASEADDR + 0x14U ) ;
 
 int main(void)
@@ -33,18 +38,21 @@ void EXTI9_5_IRQHandler(void)
 {
     if (*EXTI_PR & (1 << 6))
     {
+    	delay();
     	*EXTI_PR |= (1 << 6);
         LED_ON();
     }
 
     if (*EXTI_PR & (1 << 7))
     {
+    	delay();
     	*EXTI_PR |= (1 << 7);
         toggle_LED();
     }
 
     if (*EXTI_PR & (1 << 8))
     {
+    	delay();
     	*EXTI_PR |= (1 << 8);
         LED_OFF();
     }
